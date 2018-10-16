@@ -55,6 +55,21 @@ const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
+  
+window.onload = function() {
+  // HTML5/W3C Geolocation
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(UserLocation);
+  }
+  // Default to Ho Chi Minh, Vietnam (I could put a US city for better data)
+  else
+    NearestCity(10.762622, 106.660172);
+}
+
+// Callback function for asynchronous call to HTML5 geolocation
+function UserLocation(position) {
+  NearestCity(position.coords.latitude, position.coords.longitude);
+}
 
 </script>
   </body>
